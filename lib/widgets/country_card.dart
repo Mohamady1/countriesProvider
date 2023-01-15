@@ -6,6 +6,29 @@ import 'package:provider/provider.dart';
 class CountryCard extends StatelessWidget {
   const CountryCard({super.key});
 
+  void showCustomDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          title: Text("Great Job!"),
+          content: Text("You have added this item to your favorites"),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final country = Provider.of<Country>(context);
@@ -36,7 +59,10 @@ class CountryCard extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 18, fontWeight: FontWeight.bold)),
                 IconButton(
-                  onPressed: country.changeLikeToggle,
+                  onPressed: () {
+                    showCustomDialog(context);
+                    country.changeLikeToggle();
+                  },
                   icon: country.like
                       ? const Icon(
                           Icons.favorite,
