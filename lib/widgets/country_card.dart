@@ -14,11 +14,11 @@ class CountryCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
-          title: Text("Great Job!"),
-          content: Text("You have added this item to your favorites"),
+          title: const Text("Great Job!"),
+          content: const Text("You have added this item to your favorites"),
           actions: <Widget>[
             TextButton(
-              child: Text("Close"),
+              child: const Text("Close"),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -60,8 +60,25 @@ class CountryCard extends StatelessWidget {
                         fontSize: 18, fontWeight: FontWeight.bold)),
                 IconButton(
                   onPressed: () {
-                    showCustomDialog(context);
                     country.changeLikeToggle();
+                    if (country.like) {
+                      showCustomDialog(context);
+                    } else {
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: const Text(
+                          "u deleted it from fav",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        backgroundColor: Colors.red,
+                        duration: const Duration(seconds: 2),
+                        action: SnackBarAction(
+                          label: "Undo",
+                          onPressed: country.changeLikeToggle,
+                          textColor: Colors.white,
+                        ),
+                      ));
+                    }
                   },
                   icon: country.like
                       ? const Icon(
