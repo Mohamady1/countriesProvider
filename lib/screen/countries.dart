@@ -43,7 +43,7 @@ class Countries extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => go(context),
         child: const Icon(
-          Icons.favorite,
+          Icons.favorite_outline,
         ),
       ),
     );
