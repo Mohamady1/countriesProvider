@@ -19,10 +19,14 @@ class _FavourotesState extends State<Favourotes> {
     final allCountries = Provider.of<AllDataProvider>(context);
     final fav = allCountries.countries.where((item) => item.like);
     return Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
-            title: const Text("Favourites Places"),
-            centerTitle: true,
-            backgroundColor: const Color.fromARGB(193, 255, 17, 0)),
+          iconTheme: IconThemeData(color: Theme.of(context).accentColor),
+          title: Text("Favourites Places",
+              style: TextStyle(color: Theme.of(context).accentColor)),
+          backgroundColor: Theme.of(context).primaryColor,
+          centerTitle: true,
+        ),
         body: fav.isEmpty
             ? Center(
                 child: Column(
@@ -30,13 +34,13 @@ class _FavourotesState extends State<Favourotes> {
                   children: [
                     Image.network(
                         "https://cdni.iconscout.com/illustration/premium/thumb/not-found-4064375-3363936.png"),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: FittedBox(
                         child: Text(
                           "No Favourites Country Found",
                           style: TextStyle(
-                              color: Color.fromARGB(255, 245, 11, 11),
+                              color: Theme.of(context).accentColor,
                               fontSize: 30,
                               fontWeight: FontWeight.bold),
                         ),

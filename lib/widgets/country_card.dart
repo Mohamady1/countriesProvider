@@ -33,6 +33,8 @@ class CountryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final country = Provider.of<Country>(context);
     return Card(
+      color: Theme.of(context).primaryColor,
+      shadowColor: Theme.of(context).accentColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       elevation: 5,
       margin: const EdgeInsets.all(15),
@@ -56,8 +58,10 @@ class CountryCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(country.country,
-                    style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold)),
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).accentColor)),
                 IconButton(
                   onPressed: () {
                     country.changeLikeToggle();
@@ -66,16 +70,18 @@ class CountryCard extends StatelessWidget {
                     } else {
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: const Text(
+                        content: Text(
                           "u deleted it from fav",
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Theme.of(context).primaryColor),
                         ),
-                        backgroundColor: Colors.red,
+                        backgroundColor: Theme.of(context).accentColor,
                         duration: const Duration(seconds: 2),
                         action: SnackBarAction(
                           label: "Undo",
                           onPressed: country.changeLikeToggle,
-                          textColor: Colors.white,
+                          textColor: Theme.of(context).primaryColor,
                         ),
                       ));
                     }

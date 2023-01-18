@@ -1,3 +1,4 @@
+import 'package:countries/provider/toggle_theme_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:countries/provider/data.dart';
@@ -15,22 +16,34 @@ class Countries extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var countries = Provider.of<AllDataProvider>(context);
-    return Container(
-      color: const Color.fromARGB(193, 255, 17, 0),
-      child: SafeArea(
-        child: Scaffold(
-          body: ListView.builder(
-              itemBuilder: ((context, index) {
-                return ChangeNotifierProvider<Country>.value(
-                    value: countries.countries[index], child: CountryCard());
-              }),
-              itemCount: countries.countries.length),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => go(context),
-            backgroundColor: Colors.red,
-            child: const Icon(Icons.favorite),
-          ),
+    final theme = Provider.of<ToggleTheme>(context);
+    final countries = Provider.of<AllDataProvider>(context);
+    return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Theme.of(context).accentColor),
+        leading: const Icon(Icons.flight_takeoff),
+        title: Text("Countries",
+            style: TextStyle(color: Theme.of(context).accentColor)),
+        backgroundColor: Theme.of(context).primaryColor,
+        actions: [
+          IconButton(
+              onPressed: theme.toggleTheme,
+              icon: theme.dark
+                  ? const Icon(Icons.sunny)
+                  : const Icon(Icons.nights_stay))
+        ],
+      ),
+      body: ListView.builder(
+          itemBuilder: ((context, index) {
+            return ChangeNotifierProvider<Country>.value(
+                value: countries.countries[index], child: const CountryCard());
+          }),
+          itemCount: countries.countries.length),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => go(context),
+        child: const Icon(
+          Icons.favorite,
         ),
       ),
     );
