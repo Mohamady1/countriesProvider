@@ -2,7 +2,7 @@
 
 A new Flutter project.
 
-- I put in this snackbars, showDialogeAlert and implement light/dark theme beside provider state mangment practice 
+- I put in this snackbars, showDialogeAlert, implement light/dark theme and using Form Widget beside provider state mangment practice 
 
 ## Getting Started
 
