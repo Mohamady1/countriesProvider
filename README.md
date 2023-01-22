@@ -1,6 +1,8 @@
 # countries
 
-A new Flutter project. for provider state managment practice
+A new Flutter project.
+
+- I put in this snackbars, showDialogeAlert and implement light/dark theme beside provider state mangment practice 
 
 ## Getting Started
 
