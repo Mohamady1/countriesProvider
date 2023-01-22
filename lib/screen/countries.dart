@@ -10,8 +10,12 @@ import 'package:countries/widgets/country_card.dart';
 class Countries extends StatelessWidget {
   const Countries({super.key});
 
-  void go(BuildContext context) {
+  void goToFav(BuildContext context) {
     Navigator.of(context).pushNamed('/fav');
+  }
+
+  void goToAddCountry(BuildContext context) {
+    Navigator.of(context).pushNamed('/add');
   }
 
   @override
@@ -28,20 +32,33 @@ class Countries extends StatelessWidget {
         backgroundColor: Theme.of(context).primaryColor,
         actions: [
           IconButton(
+            icon: Icon(Icons.add, color: Theme.of(context).accentColor),
+            onPressed: () => goToAddCountry(context),
+          ),
+          IconButton(
               onPressed: theme.toggleTheme,
               icon: theme.dark
                   ? const Icon(Icons.sunny)
-                  : const Icon(Icons.nights_stay))
+                  : const Icon(Icons.nights_stay)),
         ],
       ),
-      body: ListView.builder(
-          itemBuilder: ((context, index) {
-            return ChangeNotifierProvider<Country>.value(
-                value: countries.countries[index], child: const CountryCard());
-          }),
-          itemCount: countries.countries.length),
+      body: countries.countries.isEmpty
+          ? Center(
+              child: Text(
+                "No Countries Add one now",
+                style: TextStyle(
+                    color: Theme.of(context).accentColor, fontSize: 25),
+              ),
+            )
+          : ListView.builder(
+              itemBuilder: ((context, index) {
+                return ChangeNotifierProvider<Country>.value(
+                    value: countries.countries[index],
+                    child: const CountryCard());
+              }),
+              itemCount: countries.countries.length),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => go(context),
+        onPressed: () => goToFav(context),
         child: const Icon(
           Icons.favorite_outline,
         ),

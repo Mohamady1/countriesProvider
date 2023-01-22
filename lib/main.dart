@@ -1,3 +1,4 @@
+import 'package:countries/screen/add_country.dart';
 import 'package:flutter/material.dart';
 
 import 'package:countries/provider/all_data_provider.dart';
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
       theme: theme.setColors(),
       routes: {
         "/": (context) => const Countries(),
-        "/fav": (context) => const Favourotes()
+        "/fav": (context) => const Favourotes(),
+        "/add": (context) => const AddCountry()
       },
     );
   }

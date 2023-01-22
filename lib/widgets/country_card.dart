@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:countries/provider/all_data_provider.dart';
 import 'package:countries/provider/data.dart';
 import 'package:provider/provider.dart';
 
@@ -32,6 +33,7 @@ class CountryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final country = Provider.of<Country>(context);
+    final countries = Provider.of<AllDataProvider>(context);
     return Card(
       color: Theme.of(context).primaryColor,
       shadowColor: Theme.of(context).accentColor,
@@ -96,6 +98,9 @@ class CountryCard extends StatelessWidget {
                           color: Colors.red,
                         ),
                 ),
+                IconButton(
+                    onPressed: () => countries.removeCountry(country.flag),
+                    icon: const Icon(Icons.delete, color: Colors.red)),
               ],
             ),
           ),
